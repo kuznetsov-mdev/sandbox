@@ -1,5 +1,7 @@
 package com.sandbox.compose.bookshelf.ui
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -12,6 +14,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.sandbox.compose.bookshelf.BooksApplication
 import com.sandbox.compose.bookshelf.data.Book
 import com.sandbox.compose.bookshelf.data.BooksRepository
+import com.sandbox.compose.bookshelf.ui.SearchWidgetState.CLOSED
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
@@ -28,6 +31,22 @@ class BooksViewModel(
 
     var booksUiState: BooksUiState by mutableStateOf(BooksUiState.Loading)
         private set
+
+    private val _searchWidgetState: MutableState<SearchWidgetState> =
+        mutableStateOf(CLOSED)
+    val searchWidgetState: State<SearchWidgetState> = _searchWidgetState
+
+    private val _searchTextState: MutableState<String> =
+        mutableStateOf(value = "")
+    val searchTextState: State<String> = _searchTextState
+
+    fun updateWidgetState(newValue: SearchWidgetState) {
+        _searchWidgetState.value = newValue
+    }
+
+    fun updateSearchTextState(newValue: String) {
+        _searchTextState.value = newValue
+    }
 
     init {
         getBooks()
@@ -57,4 +76,9 @@ class BooksViewModel(
             }
         }
     }
+}
+
+enum class SearchWidgetState {
+    OPENED,
+    CLOSED
 }
