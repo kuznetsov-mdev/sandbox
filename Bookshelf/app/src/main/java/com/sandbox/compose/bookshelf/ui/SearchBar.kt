@@ -43,7 +43,7 @@ fun MainAppBar(
         }
 
         SearchWidgetState.OPENED -> {
-            OpennedAppBar(
+            OpenedAppBar(
                 text = searchTextState,
                 onTextChanged = onTextChanged,
                 onCloseClicked = onCloseClicked,
@@ -75,7 +75,7 @@ fun ClosedAppBar(onSearchClicked: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OpennedAppBar(
+fun OpenedAppBar(
     text: String,
     onTextChanged: (String) -> Unit,
     onCloseClicked: () -> Unit,

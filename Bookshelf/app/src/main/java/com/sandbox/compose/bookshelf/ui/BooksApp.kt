@@ -9,13 +9,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.sandbox.compose.bookshelf.R
 import com.sandbox.compose.bookshelf.ui.screens.HomeScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -24,12 +20,22 @@ import com.sandbox.compose.bookshelf.ui.screens.HomeScreen
 fun BooksApp(
     modifier: Modifier = Modifier
 ) {
-    val viewModel: BooksViewModel =
-        viewModel(factory = BooksViewModel.Factory)
+    val viewModel: BooksViewModel = viewModel(factory = BooksViewModel.Factory)
+    val searchWidgetState = viewModel.searchWidgetState
+    val searchTextState = viewModel.searchTextState
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        topBar = { TopAppBar(title = { Text(stringResource(id = R.string.app_name)) }) }
+        topBar = {
+            MainAppBar(
+                searchWidgetState = searchWidgetState.value,
+                searchTextState = searchTextState.value,
+                onTextChanged = { viewModel.updateSearchTextState(it) },
+                onCloseClicked = { viewModel.updateWidgetState(SearchWidgetState.CLOSED) },
+                onSearchClicked = { viewModel.getBooks(it) },
+                onSearchTriggered = { viewModel.updateWidgetState(SearchWidgetState.OPENED) }
+            )
+        }
     ) {
         Surface(
             modifier = Modifier
