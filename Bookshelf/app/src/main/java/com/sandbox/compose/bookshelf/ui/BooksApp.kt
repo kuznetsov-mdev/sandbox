@@ -12,13 +12,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.sandbox.compose.bookshelf.data.Book
 import com.sandbox.compose.bookshelf.ui.screens.HomeScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BooksApp(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onBookClicked: (Book) -> Unit
 ) {
     val viewModel: BooksViewModel = viewModel(factory = BooksViewModel.Factory)
     val searchWidgetState = viewModel.searchWidgetState
@@ -43,8 +45,11 @@ fun BooksApp(
                 .padding(it),
             color = MaterialTheme.colorScheme.background
         ) {
-            HomeScreen(booksUiState = viewModel.booksUiState, retryAction = { viewModel::getBooks })
+            HomeScreen(
+                booksUiState = viewModel.booksUiState,
+                retryAction = { viewModel::getBooks },
+                onBookClicked = onBookClicked
+            )
         }
-
     }
 }

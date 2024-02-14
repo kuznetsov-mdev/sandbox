@@ -1,6 +1,7 @@
 package com.sandbox.compose.bookshelf.ui.screens
 
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,14 +30,18 @@ import com.sandbox.compose.bookshelf.data.Book
 @Composable
 fun BooksGridScreen(
     books: List<Book>,
-    modifier: Modifier
+    modifier: Modifier,
+    onBookClicked: (Book) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(150.dp),
         contentPadding = PaddingValues(4.dp)
     ) {
         itemsIndexed(books) { _, book ->
-            BookCard(book = book)
+            BookCard(
+                book = book,
+                onBookClicked = onBookClicked
+            )
         }
     }
 }
@@ -44,13 +49,15 @@ fun BooksGridScreen(
 @Composable
 fun BookCard(
     modifier: Modifier = Modifier,
-    book: Book
+    book: Book,
+    onBookClicked: (Book) -> Unit
 ) {
     Card(
         modifier = modifier
             .padding(4.dp)
             .fillMaxWidth()
-            .requiredHeight(296.dp),
+            .requiredHeight(296.dp)
+            .clickable { onBookClicked(book) },
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
         ),
