@@ -16,14 +16,18 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.sandbox.compose.newsapp.presentation.Dimens
 import com.sandbox.compose.newsapp.presentation.Dimens.PageIndicatorWidth
+import com.sandbox.compose.newsapp.presentation.common.NewsButton
+import com.sandbox.compose.newsapp.presentation.common.NewsTextButton
 import com.sandbox.compose.newsapp.presentation.onboarding.components.OnBoardingPage
 import com.sandbox.compose.newsapp.presentation.onboarding.components.PageIndicator
 import com.sandbox.compose.newsapp.ui.theme.NewsAppTheme
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -37,8 +41,8 @@ fun OnBoardingScreen() {
             derivedStateOf {
                 when (pagerState.currentPage) {
                     0 -> listOf("", "Next")
-                    1 -> listOf("Previous", "Next")
-                    2 -> listOf("Previous", "")
+                    1 -> listOf("Back", "Next")
+                    2 -> listOf("Back", "Get Started")
                     else -> listOf("", "")
                 }
             }
@@ -62,7 +66,30 @@ fun OnBoardingScreen() {
                 pageSize = pages.size,
                 selectedPage = pagerState.currentPage
             )
+
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                val scope = rememberCoroutineScope()
+                if (buttonState.value[0].isNotEmpty()) {
+                    NewsTextButton(text = buttonState.value[0], onClick = {
+                        scope.launch {
+                            pagerState.animateScrollToPage(page = pagerState.currentPage - 1)
+                        }
+                    })
+                }
+
+                NewsButton(text = buttonState.value[1], onClick = {
+                    scope.launch {
+                        if (pagerState.currentPage == 3) {
+                            //TODO: navigate to home screen
+                        } else {
+                            pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
+                        }
+                    }
+                })
+            }
         }
+        Spacer(modifier = Modifier.weight(0.5f))
     }
 }
 
