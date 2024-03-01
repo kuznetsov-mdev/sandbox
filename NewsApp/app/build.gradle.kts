@@ -75,13 +75,11 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$navVersion")
 
     //Dagger Hilt
-    val hiltVersion = "2.45"
+    val hiltVersion = "2.48"
     implementation("com.google.dagger:hilt-android:$hiltVersion")
-//    kapt("com.google.dagger:hilt-compiler:2.45")
-//    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
     ksp("com.google.dagger:dagger-compiler:$hiltVersion") // Dagger compiler
     ksp("com.google.dagger:hilt-compiler:$hiltVersion")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -94,7 +92,7 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     //Compose Foundation
-    implementation("androidx.compose.foundation:foundation:1.6.1")
+    implementation("androidx.compose.foundation:foundation:1.6.2")
 
     //Accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.4-beta")
