@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         installSplashScreen().apply {
             setKeepOnScreenCondition {
-                viewModel.splashCondition
+                viewModel.splashScreenVisibilityCondition
             }
         }
         setContent {
