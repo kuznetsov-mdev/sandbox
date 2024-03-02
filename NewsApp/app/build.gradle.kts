@@ -75,11 +75,12 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$navVersion")
 
     //Dagger Hilt
-    val hiltVersion = "2.48"
+    val hiltVersion = "2.51"
     implementation("com.google.dagger:hilt-android:$hiltVersion")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     ksp("com.google.dagger:dagger-compiler:$hiltVersion") // Dagger compiler
     ksp("com.google.dagger:hilt-compiler:$hiltVersion")
-    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
