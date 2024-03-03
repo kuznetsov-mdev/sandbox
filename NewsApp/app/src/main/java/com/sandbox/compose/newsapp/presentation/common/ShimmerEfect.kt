@@ -57,7 +57,7 @@ fun ArticleCardShimmerEffect(
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
-                .padding(Dimens.Padding_3)
+                .padding(Dimens.SmallPadding_3)
                 .height(Dimens.ArticleCardSize)
         ) {
             Box(

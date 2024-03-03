@@ -31,8 +31,8 @@ import com.sandbox.compose.newsapp.domain.model.Article
 import com.sandbox.compose.newsapp.domain.model.Source
 import com.sandbox.compose.newsapp.presentation.Dimens.ArticleCardSize
 import com.sandbox.compose.newsapp.presentation.Dimens.IconSize_11
-import com.sandbox.compose.newsapp.presentation.Dimens.Padding_3
-import com.sandbox.compose.newsapp.presentation.Dimens.Padding_6
+import com.sandbox.compose.newsapp.presentation.Dimens.SmallPadding_3
+import com.sandbox.compose.newsapp.presentation.Dimens.SmallPadding_6
 import com.sandbox.compose.newsapp.ui.theme.NewsAppTheme
 
 @Composable
@@ -56,7 +56,7 @@ fun ArticleCard(
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
-                .padding(Padding_3)
+                .padding(SmallPadding_3)
                 .height(ArticleCardSize)
         ) {
             Text(
@@ -72,14 +72,14 @@ fun ArticleCard(
                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
                     color = colorResource(id = R.color.body),
                 )
-                Spacer(modifier = Modifier.width(Padding_6))
+                Spacer(modifier = Modifier.width(SmallPadding_6))
                 Icon(
                     painter = painterResource(id = R.drawable.ic_time),
                     contentDescription = null,
                     modifier = Modifier.size(IconSize_11),
                     tint = colorResource(id = R.color.body)
                 )
-                Spacer(modifier = Modifier.padding(Padding_6))
+                Spacer(modifier = Modifier.padding(SmallPadding_6))
                 Text(
                     text = article.publishedAt,
                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
