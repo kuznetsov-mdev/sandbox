@@ -1,4 +1,4 @@
-package com.sandbox.compose.newsapp.domain.usecases
+package com.sandbox.compose.newsapp.domain.usecases.appentry
 
 data class AppEntryUseCases(
     val readAppEntry: ReadAppEntry,
