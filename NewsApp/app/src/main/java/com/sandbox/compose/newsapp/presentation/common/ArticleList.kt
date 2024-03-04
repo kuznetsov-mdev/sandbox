@@ -64,7 +64,7 @@ fun handlePagingResult(
 }
 
 @Composable
-fun ShimmerEffect() {
+private fun ShimmerEffect() {
     Column(verticalArrangement = Arrangement.spacedBy(SmallPadding_3)) {
         repeat(10) {
             ArticleCardShimmerEffect(modifier = Modifier.padding(horizontal = SmallPadding_3))
