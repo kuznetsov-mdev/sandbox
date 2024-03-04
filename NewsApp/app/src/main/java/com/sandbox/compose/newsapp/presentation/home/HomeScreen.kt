@@ -50,50 +50,51 @@ fun HomeScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(MediumPadding_24)
+            .padding(top = MediumPadding_24)
             .statusBarsPadding()
     ) {
         Image(
-            painter = painterResource(id = R.drawable.logo),
+            painter = painterResource(id = R.drawable.ic_logo),
             contentDescription = null,
             modifier = Modifier
                 .width(150.dp)
                 .height(30.dp)
                 .padding(horizontal = MediumPadding_24)
         )
+        Spacer(modifier = Modifier.height(MediumPadding_24))
+
+        SearchBar(
+            modifier = Modifier.padding(horizontal = MediumPadding_24),
+            text = "",
+            readOnly = true,
+            onValueChange = {},
+            onClick = {
+                navigate(Route.SearchScreen.route)
+            },
+            onSearch = {}
+        )
+
+        Spacer(modifier = Modifier.height(MediumPadding_24))
+
+        Text(
+            text = titles,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = MediumPadding_24)
+                .basicMarquee(),
+            fontSize = 12.sp,
+            color = colorResource(id = R.color.placeholder)
+        )
+
+        Spacer(modifier = Modifier.height(MediumPadding_24))
+
+        ArticleList(
+            modifier = Modifier.padding(horizontal = MediumPadding_24),
+            articles = articles,
+            onClick = {
+                navigate(Route.DetailsScreen.route)
+            }
+        )
     }
-    Spacer(modifier = Modifier.height(MediumPadding_24))
 
-    SearchBar(
-        modifier = Modifier.padding(horizontal = MediumPadding_24),
-        text = "",
-        readOnly = true,
-        onValueChange = {},
-        onClick = {
-            navigate(Route.SearchScreen.route)
-        },
-        onSearch = {}
-    )
-
-    Spacer(modifier = Modifier.padding(MediumPadding_24))
-
-    Text(
-        text = titles,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = MediumPadding_24)
-            .basicMarquee(),
-        fontSize = 12.sp,
-        color = colorResource(id = R.color.placeholder)
-    )
-
-    Spacer(modifier = Modifier.padding(MediumPadding_24))
-
-    ArticleList(
-        modifier = Modifier.padding(horizontal = MediumPadding_24),
-        articles = articles,
-        onClick = {
-            navigate(Route.DetailsScreen.route)
-        }
-    )
 }
