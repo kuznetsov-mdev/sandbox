@@ -11,6 +11,7 @@ import com.sandbox.compose.newsapp.domain.usecases.appentry.ReadAppEntry
 import com.sandbox.compose.newsapp.domain.usecases.appentry.SaveAppEntry
 import com.sandbox.compose.newsapp.domain.usecases.news.GetNewsUseCase
 import com.sandbox.compose.newsapp.domain.usecases.news.NewsUseCases
+import com.sandbox.compose.newsapp.domain.usecases.news.SearchNewsUseCase
 import com.sandbox.compose.newsapp.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -58,7 +59,8 @@ object AppModule {
     @Singleton
     fun provideNewsUseCases(newsRepository: NewsRepositoryApi): NewsUseCases {
         return NewsUseCases(
-            GetNewsUseCase(newsRepository)
+            getNews = GetNewsUseCase(newsRepository),
+            searchNews = SearchNewsUseCase(newsRepository)
         )
     }
 }
