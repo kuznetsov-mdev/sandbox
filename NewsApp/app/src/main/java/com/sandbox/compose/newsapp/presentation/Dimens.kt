@@ -13,4 +13,6 @@ object Dimens {
     val SmallPadding_3 = 3.dp
     val SmallPadding_6 = 6.dp
     val IconSize_11 = 11.dp
+
+    val ImageHeight_248 = 248.dp
 }
