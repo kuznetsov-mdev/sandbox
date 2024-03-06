@@ -1,6 +1,10 @@
 package com.sandbox.compose.newsapp.di
 
 import android.app.Application
+import androidx.room.Room
+import com.sandbox.compose.newsapp.data.local.NewsDao
+import com.sandbox.compose.newsapp.data.local.NewsDatabase
+import com.sandbox.compose.newsapp.data.local.NewsTypeConverter
 import com.sandbox.compose.newsapp.data.manager.LocalUserManagerImpl
 import com.sandbox.compose.newsapp.data.remote.NewsApi
 import com.sandbox.compose.newsapp.data.repository.NewsRepositoryImpl
@@ -13,6 +17,7 @@ import com.sandbox.compose.newsapp.domain.usecases.news.GetNewsUseCase
 import com.sandbox.compose.newsapp.domain.usecases.news.NewsUseCases
 import com.sandbox.compose.newsapp.domain.usecases.news.SearchNewsUseCase
 import com.sandbox.compose.newsapp.util.Constants.BASE_URL
+import com.sandbox.compose.newsapp.util.Constants.NEWS_DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -63,4 +68,21 @@ object AppModule {
             searchNews = SearchNewsUseCase(newsRepository)
         )
     }
+
+    @Provides
+    @Singleton
+    fun provideNewsDatabase(context: Application): NewsDatabase {
+        return Room.databaseBuilder(
+            context = context,
+            klass = NewsDatabase::class.java,
+            name = NEWS_DATABASE_NAME
+        )
+            .addTypeConverter(NewsTypeConverter())
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsDao(database: NewsDatabase): NewsDao = database.newsDao
 }

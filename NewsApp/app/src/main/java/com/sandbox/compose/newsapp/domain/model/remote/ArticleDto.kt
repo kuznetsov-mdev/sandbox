@@ -1,11 +1,11 @@
-package com.sandbox.compose.newsapp.domain.model
+package com.sandbox.compose.newsapp.domain.model.remote
 
-data class Article(
+data class ArticleDto(
     val author: String,
     val content: String,
     val description: String,
     val publishedAt: String,
-    val source: Source,
+    val source: SourceDto,
     val title: String,
     val url: String,
     val urlToImage: String
