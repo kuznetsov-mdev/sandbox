@@ -27,8 +27,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.sandbox.compose.newsapp.R
-import com.sandbox.compose.newsapp.domain.model.Article
-import com.sandbox.compose.newsapp.domain.model.Source
+import com.sandbox.compose.newsapp.domain.model.remote.ArticleDto
+import com.sandbox.compose.newsapp.domain.model.remote.SourceDto
 import com.sandbox.compose.newsapp.presentation.Dimens.ArticleCardSize
 import com.sandbox.compose.newsapp.presentation.Dimens.IconSize_11
 import com.sandbox.compose.newsapp.presentation.Dimens.SmallPadding_3
@@ -38,7 +38,7 @@ import com.sandbox.compose.newsapp.ui.theme.NewsAppTheme
 @Composable
 fun ArticleCard(
     modifier: Modifier = Modifier,
-    article: Article,
+    articleDto: ArticleDto,
     onClick: () -> Unit
 ) {
     val context = LocalContext.current
@@ -49,7 +49,7 @@ fun ArticleCard(
                 .size(ArticleCardSize)
                 .clip(MaterialTheme.shapes.medium),
             contentScale = ContentScale.Crop,
-            model = ImageRequest.Builder(context).data(article.urlToImage).build(),
+            model = ImageRequest.Builder(context).data(articleDto.urlToImage).build(),
             contentDescription = "Article image"
         )
 
@@ -60,7 +60,7 @@ fun ArticleCard(
                 .height(ArticleCardSize)
         ) {
             Text(
-                text = article.title,
+                text = articleDto.title,
                 style = MaterialTheme.typography.bodyMedium,
                 color = colorResource(id = R.color.text_title),
                 maxLines = 2,
@@ -68,7 +68,7 @@ fun ArticleCard(
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = article.source.name,
+                    text = articleDto.source.name,
                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
                     color = colorResource(id = R.color.body),
                 )
@@ -81,7 +81,7 @@ fun ArticleCard(
                 )
                 Spacer(modifier = Modifier.padding(SmallPadding_6))
                 Text(
-                    text = article.publishedAt,
+                    text = articleDto.publishedAt,
                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
                     color = colorResource(id = R.color.body),
                 )
@@ -96,12 +96,12 @@ fun ArticleCard(
 fun ArticleCardPreview() {
     NewsAppTheme {
         ArticleCard(
-            article = Article(
+            articleDto = ArticleDto(
                 author = "",
                 content = "",
                 description = "",
                 publishedAt = "2 hours",
-                source = Source(id = "", name = "BBC"),
+                source = SourceDto(id = "", name = "BBC"),
                 title = "Lorem ipsum dolor sit amet consectetur adipiscing elit eget, aenean mattis accumsan velit erat mauris consequat, leo facilisis placerat sapien scelerisque nulla urna.",
                 url = "",
                 urlToImage = "https://unsplash.com/photos/business-newspaper-article-WYd_PkCa1BY",

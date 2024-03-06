@@ -6,19 +6,19 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.sandbox.compose.newsapp.domain.model.Article
+import com.sandbox.compose.newsapp.domain.model.local.ArticleEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NewsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upset(article: Article)
+    suspend fun upset(articleDto: ArticleEntity)
 
     @Delete
-    suspend fun delete(article: Article)
+    suspend fun delete(articleDto: ArticleEntity)
 
-    @Query("SELECT * FROM Article")
-    fun getArticles(): Flow<PagingData<Article>>
+    @Query("SELECT * FROM ArticleEntity")
+    fun getArticles(): Flow<PagingData<ArticleEntity>>
 
 }

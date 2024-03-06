@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.compose.LazyPagingItems
 import com.sandbox.compose.newsapp.R
-import com.sandbox.compose.newsapp.domain.model.Article
+import com.sandbox.compose.newsapp.domain.model.remote.ArticleDto
 import com.sandbox.compose.newsapp.presentation.Dimens.MediumPadding_24
 import com.sandbox.compose.newsapp.presentation.common.ArticleList
 import com.sandbox.compose.newsapp.presentation.common.SearchBar
@@ -32,7 +32,7 @@ import com.sandbox.compose.newsapp.presentation.navgraph.Route
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
-    articles: LazyPagingItems<Article>,
+    articles: LazyPagingItems<ArticleDto>,
     navigate: (String) -> Unit
 ) {
     val titles by remember {

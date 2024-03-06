@@ -10,15 +10,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.sandbox.compose.newsapp.domain.model.Article
+import com.sandbox.compose.newsapp.domain.model.remote.ArticleDto
 import com.sandbox.compose.newsapp.presentation.Dimens.MediumPadding_24
 import com.sandbox.compose.newsapp.presentation.Dimens.SmallPadding_3
 
 @Composable
 fun ArticleList(
     modifier: Modifier = Modifier,
-    articles: LazyPagingItems<Article>,
-    onClick: (Article) -> Unit
+    articles: LazyPagingItems<ArticleDto>,
+    onClick: (ArticleDto) -> Unit
 ) {
     val handlePagingResult = handlePagingResult(articles = articles)
     if (handlePagingResult) {
@@ -29,7 +29,7 @@ fun ArticleList(
         ) {
             items(count = articles.itemCount) {
                 articles[it]?.let { article ->
-                    ArticleCard(article = article, onClick = { onClick(article) })
+                    ArticleCard(articleDto = article, onClick = { onClick(article) })
                 }
             }
         }
@@ -38,7 +38,7 @@ fun ArticleList(
 
 @Composable
 fun handlePagingResult(
-    articles: LazyPagingItems<Article>
+    articles: LazyPagingItems<ArticleDto>
 ): Boolean {
     val loadState = articles.loadState
     val error = when {
