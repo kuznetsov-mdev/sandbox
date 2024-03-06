@@ -1,6 +1,5 @@
 package com.sandbox.compose.newsapp.data.local
 
-import androidx.paging.PagingData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -13,12 +12,12 @@ import kotlinx.coroutines.flow.Flow
 interface NewsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upset(articleDto: ArticleEntity)
+    suspend fun upset(article: ArticleEntity)
 
     @Delete
-    suspend fun delete(articleDto: ArticleEntity)
+    suspend fun delete(article: ArticleEntity)
 
     @Query("SELECT * FROM ArticleEntity")
-    fun getArticles(): Flow<PagingData<ArticleEntity>>
+    fun getArticles(): Flow<List<ArticleEntity>>
 
 }
