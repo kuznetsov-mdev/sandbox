@@ -18,6 +18,7 @@ import com.sandbox.compose.newsapp.domain.usecases.news.GetNewsUseCase
 import com.sandbox.compose.newsapp.domain.usecases.news.GetSelectedArticlesUseCase
 import com.sandbox.compose.newsapp.domain.usecases.news.NewsUseCases
 import com.sandbox.compose.newsapp.domain.usecases.news.SearchNewsUseCase
+import com.sandbox.compose.newsapp.domain.usecases.news.SelectArticleUseCase
 import com.sandbox.compose.newsapp.domain.usecases.news.UpsertArticleUseCase
 import com.sandbox.compose.newsapp.util.Constants.BASE_URL
 import com.sandbox.compose.newsapp.util.Constants.NEWS_DATABASE_NAME
@@ -74,7 +75,8 @@ object AppModule {
             searchNews = SearchNewsUseCase(newsRepository),
             upsertNewsUseCase = UpsertArticleUseCase(newsDao),
             deleteArticleUseCase = DeleteArticleUseCase(newsDao),
-            getSelectedArticlesUseCase = GetSelectedArticlesUseCase(newsDao)
+            getSelectedArticlesUseCase = GetSelectedArticlesUseCase(newsDao),
+            selectArticleUseCase = SelectArticleUseCase(newsDao)
         )
     }
 
