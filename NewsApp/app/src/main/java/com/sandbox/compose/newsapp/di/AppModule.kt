@@ -13,9 +13,12 @@ import com.sandbox.compose.newsapp.domain.repository.NewsRepositoryApi
 import com.sandbox.compose.newsapp.domain.usecases.appentry.AppEntryUseCases
 import com.sandbox.compose.newsapp.domain.usecases.appentry.ReadAppEntry
 import com.sandbox.compose.newsapp.domain.usecases.appentry.SaveAppEntry
+import com.sandbox.compose.newsapp.domain.usecases.news.DeleteArticleUseCase
 import com.sandbox.compose.newsapp.domain.usecases.news.GetNewsUseCase
+import com.sandbox.compose.newsapp.domain.usecases.news.GetSelectedArticlesUseCase
 import com.sandbox.compose.newsapp.domain.usecases.news.NewsUseCases
 import com.sandbox.compose.newsapp.domain.usecases.news.SearchNewsUseCase
+import com.sandbox.compose.newsapp.domain.usecases.news.UpsertArticleUseCase
 import com.sandbox.compose.newsapp.util.Constants.BASE_URL
 import com.sandbox.compose.newsapp.util.Constants.NEWS_DATABASE_NAME
 import dagger.Module
@@ -62,10 +65,16 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNewsUseCases(newsRepository: NewsRepositoryApi): NewsUseCases {
+    fun provideNewsUseCases(
+        newsRepository: NewsRepositoryApi,
+        newsDao: NewsDao
+    ): NewsUseCases {
         return NewsUseCases(
             getNews = GetNewsUseCase(newsRepository),
-            searchNews = SearchNewsUseCase(newsRepository)
+            searchNews = SearchNewsUseCase(newsRepository),
+            upsertNewsUseCase = UpsertArticleUseCase(newsDao),
+            deleteArticleUseCase = DeleteArticleUseCase(newsDao),
+            getSelectedArticlesUseCase = GetSelectedArticlesUseCase(newsDao)
         )
     }
 
