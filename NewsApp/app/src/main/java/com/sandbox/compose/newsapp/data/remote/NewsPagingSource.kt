@@ -15,9 +15,9 @@ class NewsPagingSource(
         val page = params.key ?: 1
         return try {
             val newsResponse = newsApi.getNews(page, sources)
-            totalNewsCount += newsResponse.articleDtos.size
+            totalNewsCount += newsResponse.articles.size
             LoadResult.Page(
-                data = newsResponse.articleDtos.distinctBy { it.title }, //remove duplicates articles
+                data = newsResponse.articles.distinctBy { it.title }, //remove duplicates articles
                 prevKey = null,
                 nextKey = if (totalNewsCount == newsResponse.totalResults) null else page + 1
             )
