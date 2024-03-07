@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.map
 class GetSelectedArticlesUseCase(
     private val newsDao: NewsDao
 ) {
-    suspend operator fun invoke(): Flow<List<ArticleDto>> {
+    operator fun invoke(): Flow<List<ArticleDto>> {
         return newsDao.getArticles().map { articleEntities ->
             articleEntities.map { articleEntity -> articleEntity.toDto() }
         }
