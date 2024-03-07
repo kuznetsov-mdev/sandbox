@@ -1,7 +1,9 @@
 package com.sandbox.compose.newsapp.presentation.common
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,12 +30,12 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.sandbox.compose.newsapp.R
 import com.sandbox.compose.newsapp.domain.model.remote.ArticleDto
-import com.sandbox.compose.newsapp.domain.model.remote.SourceDto
 import com.sandbox.compose.newsapp.presentation.Dimens.ArticleCardSize
 import com.sandbox.compose.newsapp.presentation.Dimens.IconSize_11
 import com.sandbox.compose.newsapp.presentation.Dimens.SmallPadding_3
 import com.sandbox.compose.newsapp.presentation.Dimens.SmallPadding_6
 import com.sandbox.compose.newsapp.ui.theme.NewsAppTheme
+import com.sandbox.compose.newsapp.util.MockData
 
 @Composable
 fun ArticleCard(
@@ -44,13 +46,19 @@ fun ArticleCard(
     val context = LocalContext.current
 
     Row(modifier = modifier.clickable { onClick() }) {
+
         AsyncImage(
             modifier = Modifier
                 .size(ArticleCardSize)
                 .clip(MaterialTheme.shapes.medium),
             contentScale = ContentScale.Crop,
             model = ImageRequest.Builder(context).data(articleDto.urlToImage).build(),
-            contentDescription = "Article image"
+            contentDescription = "Article image",
+            placeholder =
+            if (!isSystemInDarkTheme())
+                painterResource(id = R.drawable.news_paper)
+            else
+                painterResource(id = R.drawable.news_paper_night)
         )
 
         Column(
@@ -96,16 +104,8 @@ fun ArticleCard(
 fun ArticleCardPreview() {
     NewsAppTheme {
         ArticleCard(
-            articleDto = ArticleDto(
-                author = "",
-                content = "",
-                description = "",
-                publishedAt = "2 hours",
-                source = SourceDto(id = "", name = "BBC"),
-                title = "Lorem ipsum dolor sit amet consectetur adipiscing elit eget, aenean mattis accumsan velit erat mauris consequat, leo facilisis placerat sapien scelerisque nulla urna.",
-                url = "",
-                urlToImage = "https://unsplash.com/photos/business-newspaper-article-WYd_PkCa1BY",
-            )
+            modifier = Modifier.background(MaterialTheme.colorScheme.background),
+            articleDto = MockData.articleDto
         ) {}
     }
 }
