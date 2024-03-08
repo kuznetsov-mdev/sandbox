@@ -49,7 +49,7 @@ fun DetailsScreen(
         DetailsTopBar(
             onBrowserClick = { openArticleInBrowser(articleDto.url, context) },
             onShareClick = { shareArticle(articleDto.url, context) },
-            onBookmarkClick = { event(DetailsEvent.SaveArticle) },
+            onBookmarkClick = { event(DetailsEvent.UpsertDeleteArticle(articleDto)) },
             onBackClick = navigateUp
         )
 

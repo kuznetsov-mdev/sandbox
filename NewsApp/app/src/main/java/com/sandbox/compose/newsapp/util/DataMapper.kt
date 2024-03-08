@@ -24,7 +24,7 @@ fun ArticleDto.toEntity(): ArticleEntity {
 
 fun ArticleEntity.toDto(): ArticleDto {
     return ArticleDto(
-        author = this.author,
+        author = this.author ?: "",
         content = this.content,
         description = this.description,
         publishedAt = this.publishedAt,

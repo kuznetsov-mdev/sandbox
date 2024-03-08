@@ -17,16 +17,16 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.sandbox.compose.newsapp.R
+import com.sandbox.compose.newsapp.domain.model.remote.ArticleDto
 import com.sandbox.compose.newsapp.presentation.Dimens.MediumPadding_24
 import com.sandbox.compose.newsapp.presentation.common.ArticleList
-import com.sandbox.compose.newsapp.presentation.navgraph.Route
 import com.sandbox.compose.newsapp.ui.theme.NewsAppTheme
 import com.sandbox.compose.newsapp.util.MockData
 
 @Composable
 fun BookmarkScreen(
     state: BookmarkState,
-    navigate: (String) -> Unit
+    navigateToDetails: (ArticleDto) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -41,7 +41,7 @@ fun BookmarkScreen(
         )
         Spacer(modifier = Modifier.height(MediumPadding_24))
 
-        ArticleList(articles = state.articles, onClick = { navigate(Route.DetailsScreen.route) })
+        ArticleList(articles = state.articles, onClick = { navigateToDetails(it) })
     }
 }
 
@@ -60,7 +60,7 @@ fun BookmarkScreenPreview() {
                         MockData.articleDto
                     )
                 ),
-                navigate = {}
+                navigateToDetails = {}
             )
         }
     }

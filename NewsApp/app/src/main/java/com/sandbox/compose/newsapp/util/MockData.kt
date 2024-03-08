@@ -1,7 +1,9 @@
 package com.sandbox.compose.newsapp.util
 
+import com.sandbox.compose.newsapp.R
 import com.sandbox.compose.newsapp.domain.model.remote.ArticleDto
 import com.sandbox.compose.newsapp.domain.model.remote.SourceDto
+import com.sandbox.compose.newsapp.presentation.news_navigator.component.BottomNavigationItem
 
 object MockData {
 
@@ -17,5 +19,20 @@ object MockData {
         title = "The Trial Over Bitcoin’s True Creator Is in Session",
         url = "https://www.wired.com/story/craig-wright-bitcoin-satoshi-nakamoto-trial/",
         urlToImage = "https://media.wired.com/photos/65bd7e2524c06ba3ede91a33/191:100/w_1280,c_limit/Craig-Wright-Trial-Day-1-Business-Yellow-1494808061.jpg"
+    )
+
+    val menuItems = listOf(
+        BottomNavigationItem(
+            icon = R.drawable.ic_home,
+            text = "Home"
+        ),
+        BottomNavigationItem(
+            icon = R.drawable.ic_search,
+            text = "Search"
+        ),
+        BottomNavigationItem(
+            icon = R.drawable.ic_bookmark,
+            text = "Bookmark"
+        ),
     )
 }

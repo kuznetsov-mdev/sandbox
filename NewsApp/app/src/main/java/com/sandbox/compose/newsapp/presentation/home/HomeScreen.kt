@@ -27,13 +27,13 @@ import com.sandbox.compose.newsapp.domain.model.remote.ArticleDto
 import com.sandbox.compose.newsapp.presentation.Dimens.MediumPadding_24
 import com.sandbox.compose.newsapp.presentation.common.ArticleList
 import com.sandbox.compose.newsapp.presentation.common.SearchBar
-import com.sandbox.compose.newsapp.presentation.navgraph.Route
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     articles: LazyPagingItems<ArticleDto>,
-    navigate: (String) -> Unit
+    navigateToSearch: () -> Unit,
+    navigateToDetails: (ArticleDto) -> Unit,
 ) {
     val titles by remember {
         derivedStateOf {
@@ -69,7 +69,7 @@ fun HomeScreen(
             readOnly = true,
             onValueChange = {},
             onClick = {
-                navigate(Route.SearchScreen.route)
+                navigateToSearch()
             },
             onSearch = {}
         )
@@ -92,7 +92,7 @@ fun HomeScreen(
             modifier = Modifier.padding(horizontal = MediumPadding_24),
             articles = articles,
             onClick = {
-                navigate(Route.DetailsScreen.route)
+                navigateToDetails(it)
             }
         )
     }

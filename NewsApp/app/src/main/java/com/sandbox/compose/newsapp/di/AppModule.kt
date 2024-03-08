@@ -18,6 +18,7 @@ import com.sandbox.compose.newsapp.domain.usecases.news.GetNewsUseCase
 import com.sandbox.compose.newsapp.domain.usecases.news.GetSelectedArticlesUseCase
 import com.sandbox.compose.newsapp.domain.usecases.news.NewsUseCases
 import com.sandbox.compose.newsapp.domain.usecases.news.SearchNewsUseCase
+import com.sandbox.compose.newsapp.domain.usecases.news.SelectArticleUseCase
 import com.sandbox.compose.newsapp.domain.usecases.news.UpsertArticleUseCase
 import com.sandbox.compose.newsapp.util.Constants.BASE_URL
 import com.sandbox.compose.newsapp.util.Constants.NEWS_DATABASE_NAME
@@ -60,7 +61,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNewsRepository(newsApi: NewsApi): NewsRepositoryApi = NewsRepositoryImpl(newsApi)
+    fun provideNewsRepository(newsApi: NewsApi, newsDao: NewsDao): NewsRepositoryApi =
+        NewsRepositoryImpl(
+            newsApi = newsApi,
+            newsDao = newsDao
+        )
 
 
     @Provides
@@ -72,9 +77,10 @@ object AppModule {
         return NewsUseCases(
             getNews = GetNewsUseCase(newsRepository),
             searchNews = SearchNewsUseCase(newsRepository),
-            upsertNewsUseCase = UpsertArticleUseCase(newsDao),
-            deleteArticleUseCase = DeleteArticleUseCase(newsDao),
-            getSelectedArticlesUseCase = GetSelectedArticlesUseCase(newsDao)
+            upsertNewsUseCase = UpsertArticleUseCase(newsRepository),
+            deleteArticleUseCase = DeleteArticleUseCase(newsRepository),
+            getSelectedArticlesUseCase = GetSelectedArticlesUseCase(newsRepository),
+            selectArticleUseCase = SelectArticleUseCase(newsRepository)
         )
     }
 
