@@ -82,6 +82,11 @@ fun handlePagingResult(
             false
         }
 
+        articles.itemCount == 0 -> {
+            EmptyScreen()
+            false
+        }
+
         else -> true
     }
 }
