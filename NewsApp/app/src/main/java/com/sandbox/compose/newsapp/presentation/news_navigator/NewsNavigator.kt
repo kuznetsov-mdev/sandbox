@@ -63,31 +63,39 @@ fun NewsNavigator() {
         else -> 0
     }
 
+    val isBottomBarVisible = remember(key1 = backStackState) {
+        backStackState?.destination?.route == Route.HomeScreen.route ||
+                backStackState?.destination?.route == Route.SearchScreen.route ||
+                backStackState?.destination?.route == Route.BookmarkScreen.route
+    }
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            NewsBottomNavigation(
-                items = bottomNavigationItem,
-                selected = selectedItem,
-                onItemClick = { idx ->
-                    when (idx) {
-                        1 -> navigateToTab(
-                            navController = navController,
-                            route = Route.SearchScreen.route
-                        )
+            if (isBottomBarVisible) {
+                NewsBottomNavigation(
+                    items = bottomNavigationItem,
+                    selected = selectedItem,
+                    onItemClick = { idx ->
+                        when (idx) {
+                            1 -> navigateToTab(
+                                navController = navController,
+                                route = Route.SearchScreen.route
+                            )
 
-                        2 -> navigateToTab(
-                            navController = navController,
-                            route = Route.BookmarkScreen.route
-                        )
+                            2 -> navigateToTab(
+                                navController = navController,
+                                route = Route.BookmarkScreen.route
+                            )
 
-                        else -> navigateToTab(
-                            navController = navController,
-                            route = Route.HomeScreen.route
-                        )
+                            else -> navigateToTab(
+                                navController = navController,
+                                route = Route.HomeScreen.route
+                            )
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     ) {
         val bottomPadding = it.calculateBottomPadding()
