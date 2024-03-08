@@ -42,6 +42,10 @@ fun ArticleList(
     articles: List<ArticleDto>,
     onClick: (ArticleDto) -> Unit
 ) {
+    if (articles.isEmpty()) {
+        EmptyScreen()
+    }
+
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(MediumPadding_24),
