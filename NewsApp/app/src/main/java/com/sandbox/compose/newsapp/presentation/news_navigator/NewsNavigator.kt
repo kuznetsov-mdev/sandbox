@@ -56,11 +56,13 @@ fun NewsNavigator() {
         mutableStateOf(0)
     }
 
-    selectedItem = when (backStackState?.destination?.route) {
-        Route.HomeScreen.route -> 0
-        Route.SearchScreen.route -> 1
-        Route.BookmarkScreen.route -> 2
-        else -> 0
+    selectedItem = remember(key1 = backStackState) {
+        when (backStackState?.destination?.route) {
+            Route.HomeScreen.route -> 0
+            Route.SearchScreen.route -> 1
+            Route.BookmarkScreen.route -> 2
+            else -> 0
+        }
     }
 
     val isBottomBarVisible = remember(key1 = backStackState) {
